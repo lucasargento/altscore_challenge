@@ -33,50 +33,14 @@ async def get_repair_bay():
     code = SYSTEM_CODE_MAPPING.get(damaged_system, "UNKNOWN")
     html_content = f"""
     <!DOCTYPE html>
-    <html lang="en">
+    <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Repair Bay</title>
-        <style>
-            body {{
-                font-family: Arial, sans-serif;
-                background-color: #2c3e50;
-                color: #ecf0f1;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-            }}
-            .container {{
-                text-align: center;
-                background-color: #34495e;
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            }}
-            h1 {{
-                font-size: 2.5em;
-                margin-bottom: 20px;
-            }}
-            p {{
-                font-size: 1.2em;
-            }}
-            .system {{
-                font-weight: bold;
-                color: #e74c3c;
-            }}
-        </style>
+        <title>Repair</title>
     </head>
     <body>
-        <div class="container">
-            <h1>Repair Bay</h1>
-            <p>The following system is damaged and needs repair:</p>
-            <p class="system">{code}</p>
-        </div>
+    <div class="anchor-point">{code}</div>
     </body>
-    </html>
+    </html>    
     """
     return HTMLResponse(content=html_content, status_code=200)
 
