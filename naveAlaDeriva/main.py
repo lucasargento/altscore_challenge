@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse,JSONResponse
 import random
 
@@ -44,6 +44,28 @@ async def get_repair_bay():
     """
     return HTMLResponse(content=html_content, status_code=200)
 
+@app.get("/phase-change-diagram")
+async def reconstruct_phase_diagram(pressure = Query(...)):
+    print("Received pressure ", pressure)
+    pressure = float(pressure)
+    if pressure == 10:
+        return {
+            "specific_volume_liquid": 0.0035,
+            "specific_volume_vapor": 0.0035
+            }
+    elif pressure == 0.05:
+        return {
+            "specific_volume_liquid": 0.00105,
+            "specific_volume_vapor": 30.00
+        }
+    else:
+        # calculamos las funciones inversas V(p)
+        volume_liquid = (pressure + (59/14)) / (199000/49)
+        volume_vapor = (pressure - (1199993/119860))/(-(1990/5993))
+        return {
+            "specific_volume_liquid": volume_liquid,
+            "specific_volume_vapor": volume_vapor
+        }
 
 @app.post("/teapot")
 async def post_teapot():
