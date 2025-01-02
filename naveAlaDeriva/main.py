@@ -63,8 +63,8 @@ async def reconstruct_phase_diagram(pressure = Query(...)):
         volume_liquid = (pressure + (59/14)) / (199000/49)
         volume_vapor = (pressure - (1199993/119860))/(-(1990/5993))
         return {
-            "specific_volume_liquid": volume_liquid,
-            "specific_volume_vapor": volume_vapor
+            "specific_volume_liquid": round(volume_liquid,5),
+            "specific_volume_vapor": round(volume_vapor,5)
         }
 
 @app.post("/teapot")
